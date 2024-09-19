@@ -1,22 +1,26 @@
 %% This will clear and edit your matlab path
 % possibly necessary if you don't have eeglab set up correctly
 restoredefaultpath
-gaborgenCodeRepository = '/home/andrewf/Repositories/gaborgen';
-eeglabDirectory = '/home/andrewf/Repositories/eeglab2024.0';
+% gaborgenCodeRepository = '/home/andrewf/Repositories/gaborgen';
+gaborgenCodeRepository = '/Users/researchassistants/Documents/GitHub/gaborgen';
+
+% eeglabDirectory = '/home/andrewf/Repositories/eeglab2024.0';
+eeglabDirectory = '/Users/researchassistants/Documents/MATLAB/eeglab2024.1';
+
 cd(eeglabDirectory)
 [AllEEG, ~, ~, ~] = eeglab;
 cd(gaborgenCodeRepository)
 
 % Add EMGS directory and all subdirectories to path
-emegs28path = '/home/andrewf/Repositories/emegs2.8'; 
-addpath(genpath(emegs28path), '-end'); 
+% emegs28path = '/home/andrewf/Repositories/emegs2.8'; 
+% addpath(genpath(emegs28path), '-end'); 
 
 %% Preprocessing, Step 1
 % correct for scanner & cardioballistic artifacts, downsample, and filter
 % EEG_prep4ICA(partID,newSamplingRate,filterCutOff,parentFolder)
 % Data should be dropbox organization: parentFolder/raw_data/...partID/EEG
-EEG_prep4ICA([130],500,[3 40], ...
-    '/home/andrewf/Research_data/EEG/Gaborgen24_EEG_fMRI');
+EEG_prep4ICA([116],500,[3 40], ...
+    '/Users/researchassistants/Documents/EEGstudies/Gaborgen24_EEG_fMRI');
 
 
 
@@ -33,9 +37,9 @@ EEG_prep4ICA([130],500,[3 40], ...
 % 
 
 %EEG_runICA(partID, exclude4ICA, parentFolder, day1, day2)
-EEG_runICA([130], ...
+EEG_runICA([114], ...
     {{}}, ...
-    '/home/andrewf/Research_data/EEG/Gaborgen24_EEG_fMRI')
+    '/Users/researchassistants/Documents/EEGstudies/Gaborgen24_EEG_fMRI')
 
 
 %%% manual step: check which ICs to remove and which channels to interpolate
@@ -46,10 +50,9 @@ EEG_runICA([130], ...
 % exclude artifact ICs, interpolate bad channels, apply average reference,
 % run artifact rejection, apply CSD
 
-%EEG_finishPrepro(partID, excludeICs, interpolateChans, parentFolder, day1, day2)
 
-EEG_finishPrepro([130],{[]}, {{}}, ...
-    '/home/andrewf/Research_data/EEG/Gaborgen24_EEG_fMRI')
+ EEG_finishPrepro([110],{[]}, {{}}, ...
+ '/Users/researchassistants/Documents/EEGstudies/Gaborgen24_EEG_fMRI')
 
 % % 101 ICs - Gradients: 1,2,6,9,15; eyes: 3,5; CBA: 4
 % EEG_03_finishPrepro(101,{[1 2 3 4 5 6 9 15]},{{'CP1','FC2'}},'/Volumes/TOSHIBA_4TB/ssV4att_MRI')
