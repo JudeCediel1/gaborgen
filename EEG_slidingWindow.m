@@ -51,6 +51,9 @@ for partI = 1:length(partID)
             [~, EEG, ~] = pop_newset(AllEEG, EEG, 1,'gui','off');
 
 
+            %% sliding window baseline - 15 Hz
+            [powmat_bl_15,winmat3d_bl_15,~,~] = freqtag_slidewin(EEG.data, 0, blSamples_bl, ssvepSamples_bl, 15, EEG.srate, EEG.srate, 'whatever.txt');
+
             %             %% list the original trial indices from urevents for each trial category
             %             %disp('Step 2/6 - removing independent components from data');
             %             eventTable = struct2table(EEG.event);
