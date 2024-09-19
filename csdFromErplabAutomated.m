@@ -67,7 +67,7 @@ try
     assert(elec_num >= 1)
 catch
     msgboxText =  'Can''t generate CSD on empty dataset';
-    title      = 'ERPLAB: CSD dataset problems?';
+    title      = 'Get ERPLAB extension directly by EEGLAB :)';
     errorfound(msgboxText, title);
 end
 
@@ -92,14 +92,13 @@ end
 
 % check CSD tool in path
 csd_path = which('MapMontage');
-if numel(csd_path) == 0
-    msgboxText =  'Current Source Density error: Do you have the Jürgen Kayser CSD toolbox in your path?';
-    title      = 'ERPLAB: CSD path problems?';
-    errorfound(msgboxText, title);
-    return
-        
-end
-
+ if numel(csd_path) == 0
+     msgboxText =  'Current Source Density error: Do you have the Jürgen Kayser CSD toolbox in your path?';
+     title      = 'ERPLAB: CSD path problems?';
+     errorfound(msgboxText, title);
+     return
+ 
+ end
 
 % check not already CSD data
 if isfield(EEG,'datatype')
